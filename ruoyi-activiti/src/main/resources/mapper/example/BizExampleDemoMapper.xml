@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.activiti.mapper.BizExampleDemoMapper">
+
+    <resultMap type="BizExampleDemo" id="BizExampleDemoResult">
+        <result property="id"    column="id"    />
+        <result property="applyNum"    column="apply_num"    />
+        <result property="highVoltage"    column="high_voltage"    />
+        <result property="attachment"    column="attachment"    />
+        <result property="applyUserId"    column="apply_user_id"    />
+        <result property="applyUserName"    column="apply_user_name"    />
+        <result property="applyTime"    column="apply_time"    />
+        <result property="instanceId"    column="instance_id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="processKey"    column="process_key"    />
+    </resultMap>
+
+    <sql id="selectBizExampleDemoVo">
+        select id, apply_num, high_voltage, attachment, apply_user_id, apply_user_name, apply_time, instance_id, del_flag, create_by, create_time, update_by, update_time, remark, process_key from biz_example_demo
+    </sql>
+
+    <select id="selectBizExampleDemoList" parameterType="BizExampleDemo" resultMap="BizExampleDemoResult">
+        <include refid="selectBizExampleDemoVo"/>
+        where 1=1
+        <if test="applyNum != null  and applyNum != ''"> and apply_num = #{applyNum}</if>
+        <if test="highVoltage != null  and highVoltage != ''"> and high_voltage = #{highVoltage}</if>
+        <if test="attachment != null  and attachment != ''"> and attachment = #{attachment}</if>
+        <if test="applyUserId != null  and applyUserId != ''"> and apply_user_id = #{applyUserId}</if>
+        <if test="applyUserName != null  and applyUserName != ''"> and apply_user_name like concat('%', #{applyUserName}, '%')</if>
+        <if test="applyTime != null "> and apply_time = #{applyTime}</if>
+        <if test="instanceId != null  and instanceId != ''"> and instance_id = #{instanceId}</if>
+        <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        order by id desc
+    </select>
+
+    <select id="selectBizExampleDemoById" parameterType="Long" resultMap="BizExampleDemoResult">
+        <include refid="selectBizExampleDemoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBizExampleDemo" parameterType="BizExampleDemo" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_example_demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyNum != null">apply_num,</if>
+            <if test="highVoltage != null and highVoltage != ''">high_voltage,</if>
+            <if test="attachment != null">attachment,</if>
+            <if test="applyUserId != null">apply_user_id,</if>
+            <if test="applyUserName != null">apply_user_name,</if>
+            <if test="applyTime != null">apply_time,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="applyNum != null">#{applyNum},</if>
+            <if test="highVoltage != null and highVoltage != ''">#{highVoltage},</if>
+            <if test="attachment != null">#{attachment},</if>
+            <if test="applyUserId != null">#{applyUserId},</if>
+            <if test="applyUserName != null">#{applyUserName},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizExampleDemo" parameterType="BizExampleDemo">
+        update biz_example_demo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="applyNum != null">apply_num = #{applyNum},</if>
+            <if test="highVoltage != null and highVoltage != ''">high_voltage = #{highVoltage},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="applyUserId != null">apply_user_id = #{applyUserId},</if>
+            <if test="applyUserName != null">apply_user_name = #{applyUserName},</if>
+            <if test="applyTime != null">apply_time = #{applyTime},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="processKey != null">process_key = #{processKey},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizExampleDemoById" parameterType="Long">
+        delete from biz_example_demo where id = #{id}
+    </delete>
+
+    <delete id="deleteBizExampleDemoByIds" parameterType="String">
+        delete from biz_example_demo where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.activiti.mapper.BizLeaveMapper">
+
+    <resultMap type="BizLeave" id="BizLeaveResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="title"    column="title"    />
+        <result property="reason"    column="reason"    />
+        <result property="leaveStartTime"    column="leave_start_time"    />
+        <result property="leaveEndTime"    column="leave_end_time"    />
+        <result property="totalTime"    column="total_time"    />
+        <result property="realityStartTime"    column="reality_start_time"    />
+        <result property="realityEndTime"    column="reality_end_time"    />
+        <result property="applyUserId"    column="apply_user_id"    />
+        <result property="applyUserName"    column="apply_user_name"    />
+        <result property="applyTime"    column="apply_time"    />
+        <result property="instanceId"    column="instance_id"    />
+        <result property="processKey"    column="process_key"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBizLeaveVo">
+        select id, type, title, reason, leave_start_time, leave_end_time, total_time, reality_start_time, reality_end_time, apply_user_id, apply_user_name, apply_time, instance_id, process_key, del_flag, create_by, create_time, update_by, update_time, remark from biz_leave
+    </sql>
+
+    <select id="selectBizLeaveList" parameterType="BizLeave" resultMap="BizLeaveResult">
+        <include refid="selectBizLeaveVo"/>
+        where 1=1
+        <if test="type != null  and type != ''"> and type = #{type}</if>
+        <if test="title != null  and title != ''"> and title = #{title}</if>
+        <if test="leaveStartTime != null "> and leave_start_time = #{leaveStartTime}</if>
+        <if test="leaveEndTime != null "> and leave_end_time = #{leaveEndTime}</if>
+        <if test="applyUserId != null  and applyUserId != ''"> and apply_user_id = #{applyUserId}</if>
+        <if test="applyUserName != null  and applyUserName != ''"> and apply_user_name like concat('%', #{applyUserName}, '%')</if>
+        <if test="applyTime != null "> and apply_time = #{applyTime}</if>
+        <if test="instanceId != null  and instanceId != ''"> and instance_id = #{instanceId}</if>
+        <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        order by id desc
+    </select>
+
+    <select id="selectBizLeaveById" parameterType="Long" resultMap="BizLeaveResult">
+        <include refid="selectBizLeaveVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBizLeave" parameterType="BizLeave" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_leave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="title != null">title,</if>
+            <if test="reason != null">reason,</if>
+            <if test="leaveStartTime != null">leave_start_time,</if>
+            <if test="leaveEndTime != null">leave_end_time,</if>
+            <if test="totalTime != null">total_time,</if>
+            <if test="realityStartTime != null">reality_start_time,</if>
+            <if test="realityEndTime != null">reality_end_time,</if>
+            <if test="applyUserId != null">apply_user_id,</if>
+            <if test="applyUserName != null">apply_user_name,</if>
+            <if test="applyTime != null">apply_time,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="processKey != null">process_key,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="title != null">#{title},</if>
+            <if test="reason != null">#{reason},</if>
+            <if test="leaveStartTime != null">#{leaveStartTime},</if>
+            <if test="leaveEndTime != null">#{leaveEndTime},</if>
+            <if test="totalTime != null">#{totalTime},</if>
+            <if test="realityStartTime != null">#{realityStartTime},</if>
+            <if test="realityEndTime != null">#{realityEndTime},</if>
+            <if test="applyUserId != null">#{applyUserId},</if>
+            <if test="applyUserName != null">#{applyUserName},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="processKey != null">#{processKey},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizLeave" parameterType="BizLeave">
+        update biz_leave
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="reason != null">reason = #{reason},</if>
+            <if test="leaveStartTime != null">leave_start_time = #{leaveStartTime},</if>
+            <if test="leaveEndTime != null">leave_end_time = #{leaveEndTime},</if>
+            <if test="totalTime != null">total_time = #{totalTime},</if>
+            <if test="realityStartTime != null">reality_start_time = #{realityStartTime},</if>
+            <if test="realityEndTime != null">reality_end_time = #{realityEndTime},</if>
+            <if test="applyUserId != null">apply_user_id = #{applyUserId},</if>
+            <if test="applyUserName != null">apply_user_name = #{applyUserName},</if>
+            <if test="applyTime != null">apply_time = #{applyTime},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="processKey != null">process_key = #{processKey},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizLeaveById" parameterType="Long">
+        delete from biz_leave where id = #{id}
+    </delete>
+
+    <delete id="deleteBizLeaveByIds" parameterType="String">
+        delete from biz_leave where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
