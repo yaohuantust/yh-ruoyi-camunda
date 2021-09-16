@@ -32,7 +32,7 @@ public class CamundaTest {
     public void engineTest() {
         processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration()
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE)
-                .setJdbcDriver("com.mysql.jdbc.Driver")
+                .setJdbcDriver("com.mysql.cj.jdbc.Driver")
                 .setJdbcUrl("jdbc:mysql://localhost:3306/ruoyi-vue-camunda?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true")
                 .setJdbcUsername("root")
                 .setJdbcPassword("yh199210")
